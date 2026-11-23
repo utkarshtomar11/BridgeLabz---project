@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineBook | Your movie night starts here</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <div class="login-art">
+      <div class="login-brand"><span class="brand-mark">C</span> CINEBOOK</div>
+      <div class="login-copy">
+        <p class="eyebrow">THE BIG SCREEN EXPERIENCE</p>
+        <h1>One ticket.<br><em>Endless stories.</em></h1>
+        <p class="muted">Find your next favourite movie and make tonight a movie night.</p>
+      </div>
+      <div class="art-caption">NOW SHOWING · STORIES THAT STAY WITH YOU</div>
+    </div>
+    <div class="login-panel">
+      <div class="login-top"><span class="brand-mark small">C</span><span>CINEBOOK</span></div>
+      <div class="login-form-wrap">
+        <p class="eyebrow">WELCOME TO CINEBOOK</p>
+        <h2>Sign in to continue</h2>
+        <p class="muted">Choose how you want to enter.</p>
+        <div class="role-switch">
+          <button class="role-btn active" data-role="user">User</button>
+          <button class="role-btn" data-role="admin">Admin</button>
+        </div>
+        <form id="loginForm">
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="Enter username" autocomplete="username" required>
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter password" autocomplete="current-password" required>
+          <p id="loginError" class="error"></p>
+          <button class="primary-btn full" type="submit">Enter CineBook <span>→</span></button>
+        </form>
+        <div class="demo-login">
+          <span class="demo-dot"></span>
+          <div><b>Demo access</b><p>User: <code>user / user</code> &nbsp; Admin: <code>admin / admin</code></p></div>
+        </div>
+      </div>
+      <p class="login-footer">A little popcorn. A lot of magic.</p>
+    </div>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">C</span><span>CINEBOOK</span></a>
+      <div class="side-label">MENU</div>
+      <nav id="userNav" class="side-nav">
+        <button class="nav-link active" data-page="discover"><span>⌂</span> Discover</button>
+        <button class="nav-link" data-page="myBookings"><span>▣</span> My tickets</button>
+      </nav>
+      <nav id="adminNav" class="side-nav hidden">
+        <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-link" data-page="manageMovies"><span>▣</span> Manage movies</button>
+        <button class="nav-link" data-page="allBookings"><span>▤</span> Bookings</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-promo"><span>✦</span><b>Movie night?</b><p>Good stories are better on the big screen.</p></div>
+        <button id="logoutBtn" class="logout-btn">↪ &nbsp; Sign out</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark small">C</span> CINEBOOK</div>
+        <div class="breadcrumb">CineBook <span>/</span> <b id="pageName">Discover</b></div>
+        <div class="profile-area"><span class="online-dot"></span><span id="welcomeName">Guest</span><div class="avatar" id="avatar">U</div></div>
+      </header>
+
+      <section id="discoverPage" class="page">
+        <div class="hero">
+          <div class="hero-content">
+            <span class="hero-tag">✦ EDITOR'S PICK · FEATURED</span>
+            <h1>Stories worth<br>staying up for.</h1>
+            <p>Big emotions. Bigger screens. Find the film everyone's talking about.</p>
+            <button class="primary-btn" id="exploreBtn">Explore movies <span>→</span></button>
+          </div>
+          <div class="hero-note"><span class="hero-line"></span><span>YOUR NEXT FAVOURITE<br>IS JUST A SEAT AWAY</span></div>
+        </div>
+        <div class="section-heading" id="movieSection">
+          <div><p class="eyebrow">PICK YOUR PICTURE</p><h2>Now showing</h2></div>
+          <div class="movie-tools"><input id="searchMovies" class="search-box" placeholder="⌕  Search movies..."><select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Drama</option><option>Thriller</option><option>Sci-Fi</option><option>Comedy</option><option>Adventure</option></select></div>
+        </div>
+        <div id="movieGrid" class="movie-grid"></div>
+      </section>
+
+      <section id="myBookingsPage" class="page hidden">
+        <div class="page-heading"><p class="eyebrow">YOUR MOVIE DIARY</p><h1>My tickets</h1><p class="muted">All your booked movie moments, in one place.</p></div>
+        <div id="myBookingList" class="booking-list"></div>
+      </section>
+
+      <section id="dashboardPage" class="page hidden">
+        <div class="page-heading"><p class="eyebrow">THE CONTROL ROOM</p><h1>Good morning, Admin.</h1><p class="muted">Here's what's happening at your cinema today.</p></div>
+        <div class="stats-grid">
+          <div class="stat-card"><span class="stat-icon">▣</span><p>Total bookings</p><h2 id="statBookings">0</h2><small>All-time reservations</small></div>
+          <div class="stat-card"><span class="stat-icon">₹</span><p>Total revenue</p><h2 id="statRevenue">₹0</h2><small>From confirmed bookings</small></div>
+          <div class="stat-card"><span class="stat-icon">▶</span><p>Active movies</p><h2 id="statMovies">0</h2><small>Currently listed</small></div>
+          <div class="stat-card"><span class="stat-icon">▤</span><p>Seats booked</p><h2 id="statSeats">0</h2><small>Total seats reserved</small></div>
+        </div>
+        <div class="admin-lower">
+          <div class="panel"><div class="panel-head"><div><p class="eyebrow">LATEST ACTIVITY</p><h3>Recent bookings</h3></div><span class="live-label">● LIVE DATA</span></div><div id="recentBookings"></div></div>
+          <div class="panel quick-panel"><p class="eyebrow">QUICK ACTION</p><h3>Keep the lineup fresh.</h3><p class="muted">Add a movie to make it available for customers to book.</p><button class="primary-btn" id="quickAddMovie">＋ Add a movie</button></div>
+        </div>
+      </section>
+
+      <section id="manageMoviesPage" class="page hidden">
+        <div class="page-heading row-heading"><div><p class="eyebrow">YOUR CINEMA, YOUR LINEUP</p><h1>Manage movies</h1><p class="muted">Add, update or remove movies from the customer screen.</p></div><button class="primary-btn" id="addMovieBtn">＋ Add movie</button></div>
+        <div id="adminMovieList" class="admin-movie-list"></div>
+      </section>
+
+      <section id="allBookingsPage" class="page hidden">
+        <div class="page-heading"><p class="eyebrow">CUSTOMER ACTIVITY</p><h1>All bookings</h1><p class="muted">A complete view of reservations made on CineBook.</p></div>
+        <div class="panel table-panel"><div id="allBookingTable"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="bookingModal" class="modal hidden">
+    <div class="modal-card booking-card">
+      <button class="close-btn" data-close="bookingModal">×</button>
+      <div id="bookingContent"></div>
+    </div>
+  </div>
+  <div id="movieModal" class="modal hidden">
+    <div class="modal-card form-card">
+      <button class="close-btn" data-close="movieModal">×</button>
+      <p class="eyebrow">CINEMA LINEUP</p><h2 id="movieModalTitle">Add a movie</h2>
+      <form id="movieForm">
+        <input type="hidden" id="editMovieId">
+        <label>Movie title</label><input id="movieTitle" required placeholder="e.g. The Dark Knight">
+        <div class="form-row"><div><label>Genre</label><select id="movieGenre"><option>Action</option><option>Drama</option><option>Thriller</option><option>Sci-Fi</option><option>Comedy</option><option>Adventure</option></select></div><div><label>Duration</label><input id="movieDuration" required placeholder="2h 20m"></div></div>
+        <label>Poster image URL</label><input id="moviePoster" required placeholder="https://...">
+        <label>Short description</label><textarea id="movieDescription" rows="3" placeholder="A little about the story..."></textarea>
+        <label>Ticket price (₹)</label><input id="moviePrice" type="number" min="1" value="180" required>
+        <button class="primary-btn full" type="submit">Save movie <span>→</span></button>
+      </form>
+    </div>
+  </div>
+  <script src="login.js"></script>
+  <script src="booking.js"></script>
+</body>
+</html>
